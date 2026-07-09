@@ -39,14 +39,16 @@ export const resumeAPI = {
     }),
   getLatest: () => api.get('/resume/latest'),
   getById: (id: string) => api.get(`/resume/${id}`),
+  getHistory: () => api.get('/resume/history'),
 };
 
 export const jobsAPI = {
-  getAll: (filters?: { search?: string; type?: string; skill?: string }) => {
+  getAll: (filters?: { search?: string; type?: string; skill?: string; page?: number }) => {
     const params = new URLSearchParams();
     if (filters?.search) params.append('search', filters.search);
     if (filters?.type) params.append('type', filters.type);
     if (filters?.skill) params.append('skill', filters.skill);
+    if (filters?.page) params.append('page', String(filters.page));
     return api.get(`/jobs?${params.toString()}`);
   },
   getById: (id: string) => api.get(`/jobs/${id}`),

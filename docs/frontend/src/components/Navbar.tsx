@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { logout } from '../store/authSlice';
 import { notificationsAPI } from '../services/api';
-import { Bell, Briefcase, FileText, LayoutDashboard, LogOut, ShieldAlert, Sun, Moon } from 'lucide-react';
+import { Bell, Briefcase, FileText, LayoutDashboard, LogOut, ShieldAlert, Sun, Moon, History } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -91,6 +91,10 @@ const Navbar: React.FC = () => {
                 <Link to="/jobs" className="flex items-center space-x-1 text-sm font-medium hover:text-accent transition-colors">
                   <Briefcase size={16} />
                   <span>Match Jobs</span>
+                </Link>
+                <Link to="/resume/history" className="flex items-center space-x-1 text-sm font-medium hover:text-accent transition-colors">
+                  <History size={16} />
+                  <span>History</span>
                 </Link>
               </>
             )}

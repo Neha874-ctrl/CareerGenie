@@ -16,6 +16,7 @@ import ResumeUpload from './pages/ResumeUpload';
 import JobListings from './pages/JobListings';
 import JobDetails from './pages/JobDetails';
 import AdminPanel from './pages/AdminPanel';
+import ResumeHistory from './pages/ResumeHistory';
 
 import './App.css';
 
@@ -82,6 +83,14 @@ const AppContent: React.FC = () => {
               element={
                 <ProtectedRoute allowedRoles={['student']}>
                   <ResumeUpload />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/resume/history"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <ResumeHistory />
                 </ProtectedRoute>
               }
             />
