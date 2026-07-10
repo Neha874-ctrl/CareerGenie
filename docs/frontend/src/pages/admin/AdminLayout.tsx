@@ -22,6 +22,7 @@ const AdminLayout: React.FC = () => {
     { name: 'Jobs', path: '/admin/jobs', icon: Briefcase },
     { name: 'Feedback', path: '/admin/feedback', icon: MessageSquare },
     { name: 'Notifications', path: '/admin/notifications', icon: Bell },
+    { name: 'Settings', path: '/admin/settings', icon: Settings },
   ];
 
   return (

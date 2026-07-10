@@ -392,3 +392,50 @@ exports.createNotification = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
+const Setting = require('../models/Setting');
+
+/**
+ * @desc    Get global settings
+ * @route   GET /api/admin/settings
+ * @access  Private (Admin)
+ */
+exports.getSettings = async (req, res) => {
+  try {
+    let settings = await Setting.findOne();
+    if (!settings) {
+      settings = await Setting.create({});
+    }
+    return res.json({ success: true, settings });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * @desc    Update global settings
+ * @route   PUT /api/admin/settings
+ * @access  Private (Admin)
+ */
+exports.updateSettings = async (req, res) => {
+  try {
+    let settings = await Setting.findOne();
+    if (!settings) {
+      settings = new Setting();
+    }
+    
+    const { maintenanceMode, allowRegistrations, maxResumeUploadSizeMB, geminiModelVersion } = req.body;
+    
+    if (maintenanceMode !== undefined) settings.maintenanceMode = maintenanceMode;
+    if (allowRegistrations !== undefined) settings.allowRegistrations = allowRegistrations;
+    if (maxResumeUploadSizeMB !== undefined) settings.maxResumeUploadSizeMB = maxResumeUploadSizeMB;
+    if (geminiModelVersion !== undefined) settings.geminiModelVersion = geminiModelVersion;
+    
+    settings.updatedAt = Date.now();
+    await settings.save();
+
+    return res.json({ success: true, message: 'Settings updated successfully', settings });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};

@@ -24,6 +24,7 @@ import AdminJobs from './pages/admin/AdminJobs';
 import AdminResumes from './pages/admin/AdminResumes';
 import AdminFeedback from './pages/admin/AdminFeedback';
 import AdminNotifications from './pages/admin/AdminNotifications';
+import AdminSettings from './pages/admin/AdminSettings';
 
 import './App.css';
 
@@ -127,6 +128,7 @@ const AppContent: React.FC = () => {
               <Route path="jobs" element={<AdminJobs />} />
               <Route path="feedback" element={<AdminFeedback />} />
               <Route path="notifications" element={<AdminNotifications />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
 
             {/* Fallback route */}

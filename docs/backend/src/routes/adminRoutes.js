@@ -16,6 +16,8 @@ const {
   deleteFeedback,
   getAllNotifications,
   createNotification,
+  getSettings,
+  updateSettings,
 } = require('../controllers/adminController');
 const { protect, authorize } = require('../middleware/auth');
 
@@ -51,5 +53,9 @@ router.delete('/feedback/:id', deleteFeedback);
 // Notifications
 router.get('/notifications', getAllNotifications);
 router.post('/notifications', createNotification);
+
+// Settings
+router.get('/settings', getSettings);
+router.put('/settings', updateSettings);
 
 module.exports = router;

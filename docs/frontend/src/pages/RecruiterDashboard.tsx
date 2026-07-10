@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { jobsAPI, applicationsAPI } from '../services/api';
 import toast from 'react-hot-toast';
 import { Briefcase, PlusCircle, Trash, Users } from 'lucide-react';
+import FeedbackForm from '../components/FeedbackForm';
 
 const RecruiterDashboard: React.FC = () => {
   const [myJobs, setMyJobs] = useState<any[]>([]);
@@ -331,6 +332,9 @@ const RecruiterDashboard: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Feedback Section */}
+      <FeedbackForm />
     </div>
   );
 };

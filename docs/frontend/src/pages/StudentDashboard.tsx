@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { resumeAPI, applicationsAPI, jobsAPI } from '../services/api';
 import { Calendar, CheckCircle, FileText, UploadCloud } from 'lucide-react';
 import toast from 'react-hot-toast';
+import FeedbackForm from '../components/FeedbackForm';
 
 const StudentDashboard: React.FC = () => {
   const [resume, setResume] = useState<any>(null);
@@ -207,6 +208,9 @@ const StudentDashboard: React.FC = () => {
             )}
           </div>
         </div>
+        
+        {/* Feedback Section */}
+        <FeedbackForm />
       </div>
     </div>
   );

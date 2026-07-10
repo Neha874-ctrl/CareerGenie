@@ -117,6 +117,14 @@ export const adminAPI = {
   // Notifications
   getAllNotifications: (page: number = 1) => api.get(`/admin/notifications?page=${page}`),
   createNotification: (data: { title: string; message: string; recipientRole?: string }) => api.post('/admin/notifications', data),
+
+  // Settings
+  getSettings: () => api.get('/admin/settings'),
+  updateSettings: (data: any) => api.put('/admin/settings', data),
+};
+
+export const feedbackAPI = {
+  submitFeedback: (data: { subject: string; message: string }) => api.post('/feedback', data),
 };
 
 export default api;
