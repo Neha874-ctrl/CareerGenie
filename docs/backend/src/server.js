@@ -133,11 +133,21 @@ app.use(helmet({
   crossOriginResourcePolicy: false, // Allow frontend to fetch uploaded files
 }));
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://careergenie-mu.vercel.app',
-    process.env.CLIENT_URL
-  ].filter(Boolean),
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'https://careergenie-mu.vercel.app',
+      process.env.CLIENT_URL,
+    ].filter(Boolean);
+
+    // Allow requests with no origin (e.g. mobile apps, curl, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
