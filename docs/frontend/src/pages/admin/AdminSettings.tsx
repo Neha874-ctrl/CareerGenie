@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { adminAPI } from '../../services/api';
 import toast from 'react-hot-toast';
-import { Settings, Save, Server, Shield, FileText } from 'lucide-react';
+import { Save, Server, Shield, FileText } from 'lucide-react';
 
 const AdminSettings: React.FC = () => {
   const [loading, setLoading] = useState(true);
