@@ -134,15 +134,14 @@ app.use(helmet({
 }));
 app.use(cors({
   origin: (origin, callback) => {
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'https://careergenie-mu.vercel.app',
-      process.env.CLIENT_URL,
-    ].filter(Boolean);
+    // Allow requests with no origin (Postman, mobile apps, server-to-server)
+    if (!origin) return callback(null, true);
 
-    // Allow requests with no origin (e.g. mobile apps, curl, Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
+    const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
+    const isVercel = /^https:\/\/careergenie[^.]*\.vercel\.app$/.test(origin);
+    const isAllowedEnv = process.env.CLIENT_URL && origin === process.env.CLIENT_URL;
+
+    if (isLocalhost || isVercel || isAllowedEnv) {
       callback(null, true);
     } else {
       callback(new Error(`CORS: origin ${origin} not allowed`));
