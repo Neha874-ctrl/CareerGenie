@@ -56,22 +56,22 @@ const AdminDashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        <div className="bg-white border border-border-custom rounded-3xl p-5 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-5 shadow-xs">
           <Users className="text-indigo-500 mb-2" size={24} />
           <p className="text-[10px] uppercase font-bold text-text-body">Total Users</p>
           <p className="text-2xl font-black text-text-h mt-1">{stats.totalUsers}</p>
         </div>
-        <div className="bg-white border border-border-custom rounded-3xl p-5 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-5 shadow-xs">
           <Award className="text-emerald-500 mb-2" size={24} />
           <p className="text-[10px] uppercase font-bold text-text-body">Resumes Parsed</p>
           <p className="text-2xl font-black text-text-h mt-1">{stats.totalResumes}</p>
         </div>
-        <div className="bg-white border border-border-custom rounded-3xl p-5 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-5 shadow-xs">
           <Briefcase className="text-blue-500 mb-2" size={24} />
           <p className="text-[10px] uppercase font-bold text-text-body">Active Jobs</p>
           <p className="text-2xl font-black text-text-h mt-1">{stats.jobs.approvedJobs}</p>
         </div>
-        <div className="bg-white border border-border-custom rounded-3xl p-5 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-5 shadow-xs">
           <Check className="text-amber-500 mb-2" size={24} />
           <p className="text-[10px] uppercase font-bold text-text-body">Applications</p>
           <p className="text-2xl font-black text-text-h mt-1">{stats.totalApplications}</p>
@@ -80,7 +80,7 @@ const AdminDashboard: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         {/* Users Chart */}
-        <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
           <h2 className="text-lg font-bold text-text-h mb-6">User Distribution</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -106,7 +106,7 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* ATS Scores Chart */}
-        <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
           <h2 className="text-lg font-bold text-text-h mb-6">ATS Score Distribution</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -122,7 +122,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+      <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
         <h2 className="text-lg font-bold text-text-h mb-6 flex items-center space-x-2">
           <Activity className="text-accent" size={20} />
           <span>Recent Signups</span>
@@ -143,7 +143,7 @@ const AdminDashboard: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-border-custom/50">
                 {stats.recentUsers.map((user: any) => (
-                  <tr key={user._id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={user._id} className="hover:bg-code-bg/50 transition-colors">
                     <td className="py-4 px-4 font-bold text-text-h">{user.name}</td>
                     <td className="py-4 px-4 text-text-body">{user.email}</td>
                     <td className="py-4 px-4">

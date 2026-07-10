@@ -93,7 +93,7 @@ const RecruiterDashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-gray-50/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
+    <div className="flex-1 bg-code-bg/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-extrabold text-text-h mb-2">Recruiter Workspace</h1>
@@ -110,7 +110,7 @@ const RecruiterDashboard: React.FC = () => {
 
       {showCreateForm ? (
         /* Create Job Form */
-        <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs max-w-2xl">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs max-w-2xl">
           <h2 className="text-xl font-bold text-text-h mb-6">Post New Opening</h2>
 
           <form onSubmit={handleSubmit(handleCreateJob)} className="space-y-4">
@@ -122,7 +122,7 @@ const RecruiterDashboard: React.FC = () => {
                   type="text"
                   placeholder="Software Engineer Intern"
                   {...register('title', { required: 'Job title is required' })}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                  className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
                 />
                 {errors.title && <span className="text-xs text-red-500 mt-1 block">{(errors.title as any).message}</span>}
               </div>
@@ -134,7 +134,7 @@ const RecruiterDashboard: React.FC = () => {
                   type="text"
                   placeholder="CareerGenie Inc"
                   {...register('company', { required: 'Company is required' })}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                  className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
                 />
                 {errors.company && <span className="text-xs text-red-500 mt-1 block">{(errors.company as any).message}</span>}
               </div>
@@ -148,7 +148,7 @@ const RecruiterDashboard: React.FC = () => {
                   type="text"
                   placeholder="New York, NY (Hybrid)"
                   {...register('location', { required: 'Location is required' })}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                  className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
                 />
                 {errors.location && <span className="text-xs text-red-500 mt-1 block">{(errors.location as any).message}</span>}
               </div>
@@ -158,7 +158,7 @@ const RecruiterDashboard: React.FC = () => {
                 <label className="block text-xs font-semibold text-text-h uppercase tracking-wide mb-2">Job Type</label>
                 <select
                   {...register('type', { required: true })}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h cursor-pointer"
+                  className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h cursor-pointer"
                 >
                   <option value="Full-time">Full-time</option>
                   <option value="Part-time">Part-time</option>
@@ -173,7 +173,7 @@ const RecruiterDashboard: React.FC = () => {
                 <input
                   type="date"
                   {...register('deadline', { required: 'Deadline is required' })}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                  className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
                 />
                 {errors.deadline && <span className="text-xs text-red-500 mt-1 block">{(errors.deadline as any).message}</span>}
               </div>
@@ -186,7 +186,7 @@ const RecruiterDashboard: React.FC = () => {
                 type="text"
                 placeholder="React, TypeScript, Node.js, MongoDB, Git"
                 {...register('requirements', { required: 'Requirements are required' })}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
               />
               <p className="text-[10px] text-text-body/70 mt-1">Provide critical skills. Matches are calculated against these items.</p>
               {errors.requirements && <span className="text-xs text-red-500 mt-1 block">{(errors.requirements as any).message}</span>}
@@ -199,7 +199,7 @@ const RecruiterDashboard: React.FC = () => {
                 rows={5}
                 placeholder="Detail job tasks, responsibilities, and qualifications..."
                 {...register('description', { required: 'Description is required' })}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
+                className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h"
               ></textarea>
               {errors.description && <span className="text-xs text-red-500 mt-1 block">{(errors.description as any).message}</span>}
             </div>
@@ -232,7 +232,7 @@ const RecruiterDashboard: React.FC = () => {
                   key={job._id}
                   onClick={() => handleSelectJob(job)}
                   className={`border p-4 rounded-2xl hover:border-accent-border/30 transition-all cursor-pointer relative flex justify-between items-start ${
-                    selectedJob?._id === job._id ? 'border-accent bg-accent-bg/10' : 'border-border-custom bg-white'
+                    selectedJob?._id === job._id ? 'border-accent bg-accent-bg/10' : 'border-border-custom bg-bg-custom'
                   }`}
                 >
                   <div>
@@ -255,7 +255,7 @@ const RecruiterDashboard: React.FC = () => {
           </div>
 
           {/* Applicant Pipeline details */}
-          <div className="lg:col-span-2 space-y-4 bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="lg:col-span-2 space-y-4 bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <h2 className="text-lg font-bold text-text-h mb-6 flex items-center space-x-1.5">
               <Users size={20} className="text-accent" />
               <span>Applicant Pipeline</span>
@@ -291,7 +291,7 @@ const RecruiterDashboard: React.FC = () => {
                         <select
                           value={app.status}
                           onChange={(e) => handleUpdateStatus(app._id, e.target.value)}
-                          className="text-xs font-bold border border-border-custom bg-gray-50 rounded-xl px-3 py-1.5 focus:outline-none focus:border-accent text-text-h cursor-pointer"
+                          className="text-xs font-bold border border-border-custom bg-code-bg rounded-xl px-3 py-1.5 focus:outline-none focus:border-accent text-text-h cursor-pointer"
                         >
                           <option value="Applied">Applied</option>
                           <option value="Under Review">Under Review</option>
@@ -308,7 +308,7 @@ const RecruiterDashboard: React.FC = () => {
                         <span className="text-[10px] uppercase font-bold text-text-h block mb-1">Key Skills Detected</span>
                         <div className="flex flex-wrap gap-1">
                           {app.resume?.skills?.map((skill: string, idx: number) => (
-                            <span key={idx} className="text-[10px] bg-gray-100 text-text-h px-2 py-0.5 rounded-md">
+                            <span key={idx} className="text-[10px] bg-social-bg text-text-h px-2 py-0.5 rounded-md">
                               {skill}
                             </span>
                           ))}

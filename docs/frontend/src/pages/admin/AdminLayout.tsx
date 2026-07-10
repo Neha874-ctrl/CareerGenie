@@ -25,9 +25,9 @@ const AdminLayout: React.FC = () => {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50/50 w-full overflow-hidden">
+    <div className="flex h-screen bg-code-bg/50 w-full overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-border-custom flex flex-col hidden md:flex">
+      <aside className="w-64 bg-bg-custom border-r border-border-custom flex flex-col hidden md:flex">
         <div className="p-6 border-b border-border-custom flex items-center space-x-2">
           <div className="w-8 h-8 rounded-lg bg-accent text-white flex items-center justify-center font-black text-sm">
             CG
@@ -45,7 +45,7 @@ const AdminLayout: React.FC = () => {
                 `flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
                   isActive
                     ? 'bg-accent text-white shadow-md shadow-accent/20'
-                    : 'text-text-body hover:bg-gray-50 hover:text-text-h'
+                    : 'text-text-body hover:bg-code-bg hover:text-text-h'
                 }`
               }
             >
@@ -57,7 +57,7 @@ const AdminLayout: React.FC = () => {
 
         <div className="p-4 border-t border-border-custom space-y-1">
           <button
-            className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-text-body hover:bg-gray-50 hover:text-text-h w-full transition-all"
+            className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-text-body hover:bg-code-bg hover:text-text-h w-full transition-all"
             onClick={() => toast('Settings coming soon', { icon: '⚙️' })}
           >
             <Settings size={18} />

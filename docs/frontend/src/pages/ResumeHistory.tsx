@@ -30,7 +30,7 @@ const ResumeHistory: React.FC = () => {
   }, []);
 
   const getStatusColorClass = (status: string) => {
-    if (!status) return 'text-gray-500 bg-gray-50';
+    if (!status) return 'text-gray-500 bg-code-bg';
     if (status.includes('Excellent') || status.includes('🟢')) return 'text-green-600 bg-green-50 border-green-100';
     if (status.includes('Good') || status.includes('🟡')) return 'text-amber-600 bg-amber-50 border-amber-100';
     if (status.includes('Fair') || status.includes('🟠')) return 'text-orange-600 bg-orange-50 border-orange-100';
@@ -46,7 +46,7 @@ const ResumeHistory: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 bg-gray-50/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
+    <div className="flex-1 bg-code-bg/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-text-h mb-2 flex items-center space-x-2">
           <History className="text-accent" />
@@ -58,7 +58,7 @@ const ResumeHistory: React.FC = () => {
       </div>
 
       {resumes.length === 0 ? (
-        <div className="bg-white border border-border-custom rounded-3xl p-12 text-center flex flex-col items-center">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-12 text-center flex flex-col items-center">
           <FileText size={56} className="text-text-body/30 mb-4" />
           <h3 className="text-lg font-bold text-text-h mb-2">No History Recorded</h3>
           <p className="text-sm text-text-body/75 max-w-sm mb-6">
@@ -80,7 +80,7 @@ const ResumeHistory: React.FC = () => {
                   key={resItem._id}
                   onClick={() => setSelectedResume(resItem)}
                   className={`p-4 border rounded-2xl hover:border-accent-border/30 transition-all cursor-pointer flex justify-between items-center ${
-                    selectedResume?._id === resItem._id ? 'border-accent bg-accent-bg/10' : 'border-border-custom bg-white'
+                    selectedResume?._id === resItem._id ? 'border-accent bg-accent-bg/10' : 'border-border-custom bg-bg-custom'
                   }`}
                 >
                   <div className="space-y-1">
@@ -111,9 +111,9 @@ const ResumeHistory: React.FC = () => {
           {/* Right panel - detailed analysis preview */}
           <div className="lg:col-span-2">
             {selectedResume ? (
-              <div className="bg-white border border-border-custom rounded-3xl shadow-xs overflow-hidden">
+              <div className="bg-bg-custom border border-border-custom rounded-3xl shadow-xs overflow-hidden">
                 {/* Header Summary */}
-                <div className="px-6 py-6 border-b border-border-custom bg-gray-50/50 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+                <div className="px-6 py-6 border-b border-border-custom bg-code-bg/50 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
                   <div>
                     <span className="text-[10px] font-bold text-accent uppercase tracking-wider block mb-0.5">
                       Checked on {new Date(selectedResume.createdAt).toLocaleDateString()}
@@ -124,7 +124,7 @@ const ResumeHistory: React.FC = () => {
                     </h2>
                   </div>
 
-                  <div className="flex items-center space-x-3 bg-white border border-border-custom px-4 py-2 rounded-2xl">
+                  <div className="flex items-center space-x-3 bg-bg-custom border border-border-custom px-4 py-2 rounded-2xl">
                     <Award className="text-accent" size={24} />
                     <div>
                       <p className="text-[10px] text-text-body uppercase font-bold leading-none">AI Score</p>
@@ -215,7 +215,7 @@ const ResumeHistory: React.FC = () => {
                       </div>
 
                       {/* Overall suggestions */}
-                      <div className="bg-gray-50 border border-border-custom p-5 rounded-2xl">
+                      <div className="bg-code-bg border border-border-custom p-5 rounded-2xl">
                         <h3 className="text-sm font-bold text-text-h mb-2 flex items-center">
                           <AlertCircle className="text-accent mr-1.5" size={16} />
                           <span>Suggestions for Improvement</span>

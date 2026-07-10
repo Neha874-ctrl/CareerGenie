@@ -40,8 +40,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-gray-50/50 px-6 py-12">
-      <div className="bg-white border border-border-custom p-8 rounded-3xl shadow-xl max-w-md w-full">
+    <div className="flex-1 flex items-center justify-center bg-code-bg/50 px-6 py-12">
+      <div className="bg-bg-custom border border-border-custom p-8 rounded-3xl shadow-xl max-w-md w-full">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-extrabold text-text-h mb-2">Welcome Back</h2>
           <p className="text-sm text-text-body/80">Sign in to manage your campus applications</p>
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
                     message: 'Please enter a valid email',
                   },
                 })}
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
+                className="w-full pl-10 pr-4 py-3 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
               />
             </div>
             {errors.email && (
@@ -94,7 +94,7 @@ const Login: React.FC = () => {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
+                className="w-full pl-10 pr-10 py-3 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
               />
               <button
                 type="button"

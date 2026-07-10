@@ -45,15 +45,19 @@
 
 /* Explicit class-based dark mode override */
 :root.dark {
-  --text: #e2e8f0;
-  --text-h: #ffffff;
-  --bg: #0b0914;
-  --border: #231f33;
-  --code-bg: #151221;
-  --accent: #c084fc;
-  --accent-bg: rgba(192, 132, 252, 0.15);
-  --accent-border: rgba(192, 132, 252, 0.5);
-  --social-bg: rgba(47, 48, 58, 0.5);
+  --bg: #12141d;
+  --code-bg: #1c1f2b;
+  --social-bg: rgba(139, 44, 245, 0.05);
+  
+  --text: #b7bac5;
+  --text-h: #e2e4ef;
+  
+  --border: #282e3f;
+  
+  --accent: #a05ef7;
+  --accent-bg: rgba(139, 44, 245, 0.15);
+  --accent-border: rgba(139, 44, 245, 0.5);
+  
   --shadow:
     rgba(0, 0, 0, 0.3) 0 10px 15px -3px, rgba(0, 0, 0, 0.15) 0 4px 6px -2px;
 }

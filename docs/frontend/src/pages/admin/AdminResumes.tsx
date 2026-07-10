@@ -41,7 +41,7 @@ const AdminResumes: React.FC = () => {
         <p className="text-sm text-text-body/80 font-medium">View and manage all uploaded student resumes and their AI analysis.</p>
       </div>
 
-      <div className="bg-white border border-border-custom rounded-3xl overflow-hidden shadow-xs">
+      <div className="bg-bg-custom border border-border-custom rounded-3xl overflow-hidden shadow-xs">
         {loading ? (
           <div className="flex justify-center p-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
@@ -51,7 +51,7 @@ const AdminResumes: React.FC = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-gray-50/50">
+              <thead className="bg-code-bg/50">
                 <tr className="border-b border-border-custom text-text-body/70 text-xs uppercase tracking-wider">
                   <th className="py-4 px-6 font-bold">Student</th>
                   <th className="py-4 px-6 font-bold">Filename</th>
@@ -62,7 +62,7 @@ const AdminResumes: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-border-custom/50">
                 {resumes.map((resume) => (
-                  <tr key={resume._id} className="hover:bg-gray-50/30 transition-colors">
+                  <tr key={resume._id} className="hover:bg-code-bg/30 transition-colors">
                     <td className="py-4 px-6">
                       <p className="font-bold text-text-h">{resume.student?.name || 'Unknown'}</p>
                       <p className="text-xs text-text-body">{resume.student?.email}</p>

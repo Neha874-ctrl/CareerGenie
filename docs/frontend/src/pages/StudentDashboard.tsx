@@ -52,7 +52,7 @@ const StudentDashboard: React.FC = () => {
       case 'Rejected':
         return 'bg-red-50 text-red-600 border border-red-100';
       default:
-        return 'bg-gray-50 text-gray-600 border border-gray-100';
+        return 'bg-code-bg text-gray-600 border border-gray-100';
     }
   };
 
@@ -65,7 +65,7 @@ const StudentDashboard: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 bg-gray-50/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
+    <div className="flex-1 bg-code-bg/50 px-6 py-10 max-w-6xl mx-auto w-full text-left">
       <div className="mb-10">
         <h1 className="text-3xl font-extrabold text-text-h mb-2">Student Workspace</h1>
         <p className="text-sm text-text-body/80">Manage your resume profile, track application processes, and view matches.</p>
@@ -75,7 +75,7 @@ const StudentDashboard: React.FC = () => {
         {/* Left Columns - Resume and Applications */}
         <div className="lg:col-span-2 space-y-8">
           {/* Resume Card */}
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <h2 className="text-xl font-bold text-text-h mb-4 flex items-center space-x-2">
               <FileText className="text-accent" />
               <span>Resume Analysis Profile</span>
@@ -100,7 +100,7 @@ const StudentDashboard: React.FC = () => {
                   <p className="text-xs font-semibold text-text-h uppercase tracking-wider mb-2">Skills Detected</p>
                   <div className="flex flex-wrap gap-1.5">
                     {resume.skills?.slice(0, 10).map((skill: string, index: number) => (
-                      <span key={index} className="text-xs bg-gray-100 text-text-h px-3 py-1 rounded-lg">
+                      <span key={index} className="text-xs bg-social-bg text-text-h px-3 py-1 rounded-lg">
                         {skill}
                       </span>
                     ))}
@@ -130,7 +130,7 @@ const StudentDashboard: React.FC = () => {
           </div>
 
           {/* Application History Tracker */}
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <h2 className="text-xl font-bold text-text-h mb-6 flex items-center space-x-2">
               <CheckCircle className="text-accent" />
               <span>Application Tracker</span>
@@ -171,7 +171,7 @@ const StudentDashboard: React.FC = () => {
 
         {/* Right Column - Recommended Jobs */}
         <div className="space-y-8">
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <h2 className="text-xl font-bold text-text-h mb-6 flex items-center justify-between">
               <span>Matching Jobs</span>
               <Link to="/jobs" className="text-xs text-accent hover:underline font-semibold">View All</Link>

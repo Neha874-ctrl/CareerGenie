@@ -41,20 +41,20 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-gray-50/50 px-6 py-12">
-      <div className="bg-white border border-border-custom p-8 rounded-3xl shadow-xl max-w-md w-full">
+    <div className="flex-1 flex items-center justify-center bg-code-bg/50 px-6 py-12">
+      <div className="bg-bg-custom border border-border-custom p-8 rounded-3xl shadow-xl max-w-md w-full">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-extrabold text-text-h mb-2">Create Account</h2>
           <p className="text-sm text-text-body/80">Get started with CareerGenie today</p>
         </div>
 
         {/* Role Selector Tabs */}
-        <div className="grid grid-cols-3 gap-2 bg-gray-100 p-1.5 rounded-xl mb-6">
+        <div className="grid grid-cols-3 gap-2 bg-social-bg p-1.5 rounded-xl mb-6">
           <button
             type="button"
             onClick={() => setSelectedRole('student')}
             className={`py-2 rounded-lg font-semibold text-xs transition-all cursor-pointer ${
-              selectedRole === 'student' ? 'bg-white text-accent shadow-xs' : 'text-text-body hover:text-text-h'
+              selectedRole === 'student' ? 'bg-bg-custom text-accent shadow-xs' : 'text-text-body hover:text-text-h'
             }`}
           >
             I'm a Student
@@ -63,7 +63,7 @@ const Signup: React.FC = () => {
             type="button"
             onClick={() => setSelectedRole('recruiter')}
             className={`py-2 rounded-lg font-semibold text-xs transition-all cursor-pointer ${
-              selectedRole === 'recruiter' ? 'bg-white text-accent shadow-xs' : 'text-text-body hover:text-text-h'
+              selectedRole === 'recruiter' ? 'bg-bg-custom text-accent shadow-xs' : 'text-text-body hover:text-text-h'
             }`}
           >
             I'm a Recruiter
@@ -72,7 +72,7 @@ const Signup: React.FC = () => {
             type="button"
             onClick={() => setSelectedRole('admin')}
             className={`py-2 rounded-lg font-semibold text-xs transition-all cursor-pointer ${
-              selectedRole === 'admin' ? 'bg-white text-accent shadow-xs' : 'text-text-body hover:text-text-h'
+              selectedRole === 'admin' ? 'bg-bg-custom text-accent shadow-xs' : 'text-text-body hover:text-text-h'
             }`}
           >
             Admin
@@ -93,7 +93,7 @@ const Signup: React.FC = () => {
                 type="text"
                 placeholder="Jane Doe"
                 {...register('name', { required: 'Name is required' })}
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
+                className="w-full pl-10 pr-4 py-3 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
               />
             </div>
             {errors.name && (
@@ -120,7 +120,7 @@ const Signup: React.FC = () => {
                     message: 'Please enter a valid email address',
                   },
                 })}
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
+                className="w-full pl-10 pr-4 py-3 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
               />
             </div>
             {errors.email && (
@@ -147,7 +147,7 @@ const Signup: React.FC = () => {
                     message: 'Password must be at least 6 characters long',
                   },
                 })}
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
+                className="w-full pl-10 pr-10 py-3 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all text-text-h"
               />
               <button
                 type="button"

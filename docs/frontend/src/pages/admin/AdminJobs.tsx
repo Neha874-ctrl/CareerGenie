@@ -64,13 +64,13 @@ const AdminJobs: React.FC = () => {
             placeholder="Search jobs or companies..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs"
+            className="w-full pl-11 pr-4 py-3 bg-bg-custom border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-3 bg-white border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer min-w-[150px]"
+          className="px-4 py-3 bg-bg-custom border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer min-w-[150px]"
         >
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
@@ -85,12 +85,12 @@ const AdminJobs: React.FC = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
           </div>
         ) : jobs.length === 0 ? (
-          <div className="bg-white border border-border-custom rounded-3xl p-12 text-center text-text-body/60 text-sm">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-12 text-center text-text-body/60 text-sm">
             No jobs found.
           </div>
         ) : (
           jobs.map(job => (
-            <div key={job._id} className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+            <div key={job._id} className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${

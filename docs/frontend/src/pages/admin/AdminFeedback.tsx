@@ -55,7 +55,7 @@ const AdminFeedback: React.FC = () => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="mt-4 md:mt-0 px-4 py-3 bg-white border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer"
+          className="mt-4 md:mt-0 px-4 py-3 bg-bg-custom border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer"
         >
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
@@ -70,13 +70,13 @@ const AdminFeedback: React.FC = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
           </div>
         ) : feedbacks.length === 0 ? (
-          <div className="bg-white border border-border-custom rounded-3xl p-12 text-center text-text-body/60 text-sm">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-12 text-center text-text-body/60 text-sm">
             <MessageSquare size={40} className="mx-auto mb-4 opacity-30" />
             <p>No feedback found.</p>
           </div>
         ) : (
           feedbacks.map(fb => (
-            <div key={fb._id} className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+            <div key={fb._id} className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <span className={`flex items-center space-x-1 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
@@ -94,7 +94,7 @@ const AdminFeedback: React.FC = () => {
                 </div>
                 <h3 className="text-lg font-bold text-text-h mb-1">{fb.subject}</h3>
                 <p className="text-xs text-text-body/80 mb-3"><span className="font-bold text-text-h">{fb.name}</span> &lt;{fb.email}&gt;</p>
-                <div className="bg-gray-50/50 border border-border-custom p-4 rounded-xl">
+                <div className="bg-code-bg/50 border border-border-custom p-4 rounded-xl">
                   <p className="text-sm text-text-body whitespace-pre-wrap">{fb.message}</p>
                 </div>
               </div>
@@ -118,7 +118,7 @@ const AdminFeedback: React.FC = () => {
                 )}
                 <button
                   onClick={() => handleDelete(fb._id)}
-                  className="w-full px-4 py-2 text-text-body hover:bg-gray-100 rounded-xl text-xs font-bold transition-colors flex justify-center items-center space-x-1"
+                  className="w-full px-4 py-2 text-text-body hover:bg-social-bg rounded-xl text-xs font-bold transition-colors flex justify-center items-center space-x-1"
                 >
                   <Trash2 size={14} />
                   <span>Delete</span>

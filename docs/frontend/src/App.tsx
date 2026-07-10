@@ -49,7 +49,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactElement; allowedRoles?: st
 const AppContent: React.FC = () => {
   return (
     <Router>
-      <div id="root-container" className="min-h-screen flex flex-col bg-white">
+      <div id="root-container" className="min-h-screen flex flex-col bg-bg-custom">
         <Navbar />
         <main className="flex-1 flex flex-col">
           <Routes>

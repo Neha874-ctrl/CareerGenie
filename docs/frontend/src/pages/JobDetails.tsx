@@ -83,7 +83,7 @@ const JobDetails: React.FC = () => {
   if (!job) return null;
 
   return (
-    <div className="flex-1 bg-gray-50/50 px-6 py-10 max-w-4xl mx-auto w-full text-left">
+    <div className="flex-1 bg-code-bg/50 px-6 py-10 max-w-4xl mx-auto w-full text-left">
       <Link to="/jobs" className="inline-flex items-center text-xs font-bold text-accent hover:underline mb-6">
         <ArrowLeft size={14} className="mr-1" /> Back to listings
       </Link>
@@ -91,7 +91,7 @@ const JobDetails: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Job details card */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <span className="text-[10px] bg-accent-bg text-accent font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">
               {job.type}
             </span>
@@ -118,11 +118,11 @@ const JobDetails: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs">
             <h2 className="text-sm font-extrabold text-text-h uppercase tracking-wide mb-3">Key Requirements</h2>
             <div className="flex flex-wrap gap-1.5">
               {job.requirements?.map((req: string, idx: number) => (
-                <span key={idx} className="text-xs bg-gray-100 text-text-h px-3 py-1.5 rounded-xl font-medium">
+                <span key={idx} className="text-xs bg-social-bg text-text-h px-3 py-1.5 rounded-xl font-medium">
                   {req}
                 </span>
               ))}
@@ -132,7 +132,7 @@ const JobDetails: React.FC = () => {
 
         {/* Right side - Apply Panel */}
         <div className="space-y-6">
-          <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs sticky top-24">
+          <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs sticky top-24">
             <h3 className="text-sm font-extrabold text-text-h uppercase tracking-wide mb-4">Application Panel</h3>
 
             {isAuthenticated && user?.role === 'student' ? (

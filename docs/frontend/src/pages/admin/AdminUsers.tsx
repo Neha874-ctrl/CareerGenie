@@ -64,13 +64,13 @@ const AdminUsers: React.FC = () => {
             placeholder="Search by name or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs"
+            className="w-full pl-11 pr-4 py-3 bg-bg-custom border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs"
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="px-4 py-3 bg-white border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer min-w-[150px]"
+          className="px-4 py-3 bg-bg-custom border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent shadow-xs cursor-pointer min-w-[150px]"
         >
           <option value="">All Roles</option>
           <option value="student">Students</option>
@@ -79,7 +79,7 @@ const AdminUsers: React.FC = () => {
         </select>
       </div>
 
-      <div className="bg-white border border-border-custom rounded-3xl overflow-hidden shadow-xs">
+      <div className="bg-bg-custom border border-border-custom rounded-3xl overflow-hidden shadow-xs">
         {loading ? (
           <div className="flex justify-center p-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
@@ -89,7 +89,7 @@ const AdminUsers: React.FC = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-gray-50/50">
+              <thead className="bg-code-bg/50">
                 <tr className="border-b border-border-custom text-text-body/70 text-xs uppercase tracking-wider">
                   <th className="py-4 px-6 font-bold">User</th>
                   <th className="py-4 px-6 font-bold">Role</th>
@@ -100,13 +100,13 @@ const AdminUsers: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-border-custom/50">
                 {users.map((user) => (
-                  <tr key={user._id} className="hover:bg-gray-50/30 transition-colors">
+                  <tr key={user._id} className="hover:bg-code-bg/30 transition-colors">
                     <td className="py-4 px-6">
                       <p className="font-bold text-text-h">{user.name}</p>
                       <p className="text-xs text-text-body">{user.email}</p>
                     </td>
                     <td className="py-4 px-6">
-                      <span className="text-[10px] uppercase font-bold text-text-body/80 bg-gray-100 px-2.5 py-1 rounded-full">
+                      <span className="text-[10px] uppercase font-bold text-text-body/80 bg-social-bg px-2.5 py-1 rounded-full">
                         {user.role}
                       </span>
                     </td>

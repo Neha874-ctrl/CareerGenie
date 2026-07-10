@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <nav className="bg-white border-b border-border-custom px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-xs">
+    <nav className="bg-bg-custom border-b border-border-custom px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-xs">
       <Link to="/" className="flex items-center space-x-2">
         <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md shadow-accent/20">
           CG
@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
                 </button>
 
                 {showNotifDropdown && (
-                  <div className="absolute right-0 mt-3 w-80 bg-white border border-border-custom rounded-2xl shadow-xl py-2 z-50 text-left max-h-96 overflow-y-auto">
+                  <div className="absolute right-0 mt-3 w-80 bg-bg-custom border border-border-custom rounded-2xl shadow-xl py-2 z-50 text-left max-h-96 overflow-y-auto">
                     <div className="px-4 py-2 border-b border-border-custom font-semibold text-text-h flex justify-between items-center">
                       <span>Notifications</span>
                       <span className="text-xs text-accent bg-accent-bg px-2 py-0.5 rounded-full">{unreadCount} unread</span>

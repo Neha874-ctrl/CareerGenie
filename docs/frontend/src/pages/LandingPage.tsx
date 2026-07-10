@@ -8,7 +8,7 @@ const LandingPage: React.FC = () => {
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
 
   return (
-    <div className="bg-white flex-1 flex flex-col justify-start">
+    <div className="bg-bg-custom flex-1 flex flex-col justify-start">
       {/* Hero Section */}
       <section className="px-6 py-20 md:py-28 text-center max-w-4xl mx-auto flex flex-col items-center">
         <div className="inline-flex items-center space-x-2 bg-accent-bg border border-accent-border/30 rounded-full px-4 py-1.5 mb-6 animate-bounce">
@@ -75,7 +75,7 @@ const LandingPage: React.FC = () => {
         <h2 className="text-3xl font-bold text-text-h text-center mb-12">How CareerGenie Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="bg-white border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
+          <div className="bg-bg-custom border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-accent-bg text-accent rounded-xl flex items-center justify-center mb-4">
               <FileCheck size={24} />
             </div>
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
           {/* Card 2 */}
-          <div className="bg-white border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
+          <div className="bg-bg-custom border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-accent-bg text-accent rounded-xl flex items-center justify-center mb-4">
               <TrendingUp size={24} />
             </div>
@@ -95,7 +95,7 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
           {/* Card 3 */}
-          <div className="bg-white border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
+          <div className="bg-bg-custom border border-border-custom rounded-2xl p-6 text-left shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-accent-bg text-accent rounded-xl flex items-center justify-center mb-4">
               <Briefcase size={24} />
             </div>
@@ -108,7 +108,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Target Audiences Section */}
-      <section className="bg-gray-50/50 border-t border-border-custom py-20 px-6 w-full">
+      <section className="bg-code-bg/50 border-t border-border-custom py-20 px-6 w-full">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-text-h text-center mb-16">Tailored for Every Actor</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

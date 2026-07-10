@@ -44,7 +44,7 @@ const AdminNotifications: React.FC = () => {
           <p className="text-sm text-text-body/80 font-medium">Broadcast announcements to users across the platform.</p>
         </div>
 
-        <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs sticky top-8">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs sticky top-8">
           <h2 className="text-lg font-bold text-text-h mb-4">New Broadcast</h2>
           <form onSubmit={handleSubmit(handleBroadcast)} className="space-y-4">
             <div>
@@ -53,7 +53,7 @@ const AdminNotifications: React.FC = () => {
                 type="text"
                 placeholder="Platform Maintenance Notice"
                 {...register('title', { required: 'Title is required' })}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent"
+                className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent"
               />
               {errors.title && <span className="text-xs text-red-500 mt-1 block">{(errors.title as any).message}</span>}
             </div>
@@ -64,7 +64,7 @@ const AdminNotifications: React.FC = () => {
                 rows={4}
                 placeholder="Details of the announcement..."
                 {...register('message', { required: 'Message is required' })}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent"
+                className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent"
               ></textarea>
               {errors.message && <span className="text-xs text-red-500 mt-1 block">{(errors.message as any).message}</span>}
             </div>
@@ -73,7 +73,7 @@ const AdminNotifications: React.FC = () => {
               <label className="block text-xs font-semibold text-text-h uppercase tracking-wide mb-2">Target Audience</label>
               <select
                 {...register('recipientRole')}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent cursor-pointer"
+                className="w-full px-4 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent cursor-pointer"
               >
                 <option value="all">All Users</option>
                 <option value="student">Students Only</option>
@@ -93,7 +93,7 @@ const AdminNotifications: React.FC = () => {
       </div>
 
       <div className="lg:col-span-2">
-        <div className="bg-white border border-border-custom rounded-3xl p-6 shadow-xs min-h-[500px]">
+        <div className="bg-bg-custom border border-border-custom rounded-3xl p-6 shadow-xs min-h-[500px]">
           <h2 className="text-lg font-bold text-text-h mb-6">Broadcast History</h2>
           
           {loading ? (
@@ -114,7 +114,7 @@ const AdminNotifications: React.FC = () => {
                   </div>
                   <div>
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className="text-[9px] uppercase font-bold bg-gray-100 text-text-body/80 px-2 py-0.5 rounded-md">
+                      <span className="text-[9px] uppercase font-bold bg-social-bg text-text-body/80 px-2 py-0.5 rounded-md">
                         To: {n.recipientRole}
                       </span>
                       <span className="text-[10px] font-semibold text-text-body/60">

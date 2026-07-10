@@ -32,7 +32,7 @@ const SOURCE_COLORS: Record<string, string> = {
   LinkedIn: 'bg-sky-50 text-sky-600 border-sky-200',
   Glassdoor: 'bg-green-50 text-green-600 border-green-200',
   ZipRecruiter: 'bg-purple-50 text-purple-600 border-purple-200',
-  JSearch: 'bg-gray-100 text-gray-600 border-gray-200',
+  JSearch: 'bg-social-bg text-gray-600 border-gray-200',
   CareerGenie: 'bg-accent-bg text-accent border-accent/20',
 };
 
@@ -118,7 +118,7 @@ const JobListings: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-gray-50/50 px-4 md:px-8 py-10 max-w-7xl mx-auto w-full text-left">
+    <div className="flex-1 bg-code-bg/50 px-4 md:px-8 py-10 max-w-7xl mx-auto w-full text-left">
 
       {/* ─── Header ─────────────────────────────────────────────── */}
       <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -136,7 +136,7 @@ const JobListings: React.FC = () => {
         <div className="flex items-center gap-2 shrink-0">
           {!loading && (
             <>
-              <span className="text-xs bg-white border border-border-custom text-text-body font-semibold px-3 py-1.5 rounded-full">
+              <span className="text-xs bg-bg-custom border border-border-custom text-text-body font-semibold px-3 py-1.5 rounded-full">
                 {totalInternal} internal
               </span>
               <span className="text-xs bg-accent-bg text-accent border border-accent/20 font-bold px-3 py-1.5 rounded-full">
@@ -148,7 +148,7 @@ const JobListings: React.FC = () => {
       </div>
 
       {/* ─── Search & Filter ─────────────────────────────────────── */}
-      <div className="bg-white border border-border-custom rounded-2xl p-4 shadow-xs mb-5 flex flex-col md:flex-row gap-3">
+      <div className="bg-bg-custom border border-border-custom rounded-2xl p-4 shadow-xs mb-5 flex flex-col md:flex-row gap-3">
         <div className="relative flex-1">
           <Search size={17} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-body/40 pointer-events-none" />
           <input
@@ -156,7 +156,7 @@ const JobListings: React.FC = () => {
             placeholder="Search jobs, skills, companies (e.g. React developer, AWS, Google)..."
             value={search}
             onChange={handleSearchChange}
-            className="w-full pl-9 pr-9 py-2.5 bg-gray-50 border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h placeholder:text-text-body/40"
+            className="w-full pl-9 pr-9 py-2.5 bg-code-bg border border-border-custom rounded-xl text-sm focus:outline-none focus:border-accent text-text-h placeholder:text-text-body/40"
           />
           {search && (
             <button onClick={clearSearch} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-body/40 hover:text-text-h">
@@ -164,7 +164,7 @@ const JobListings: React.FC = () => {
             </button>
           )}
         </div>
-        <div className="flex items-center bg-gray-50 border border-border-custom rounded-xl px-3 min-w-[170px]">
+        <div className="flex items-center bg-code-bg border border-border-custom rounded-xl px-3 min-w-[170px]">
           <Filter size={14} className="text-text-body/40 mr-2 shrink-0" />
           <select
             value={type}
@@ -213,7 +213,7 @@ const JobListings: React.FC = () => {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="bg-white border border-border-custom rounded-3xl p-6 animate-pulse">
+            <div key={i} className="bg-bg-custom border border-border-custom rounded-3xl p-6 animate-pulse">
               <div className="h-3 bg-gray-200 rounded w-1/3 mb-4" />
               <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
               <div className="h-3 bg-gray-200 rounded w-1/2 mb-5" />
@@ -227,7 +227,7 @@ const JobListings: React.FC = () => {
           ))}
         </div>
       ) : jobs.length === 0 ? (
-        <div className="text-center py-24 bg-white border border-border-custom rounded-3xl">
+        <div className="text-center py-24 bg-bg-custom border border-border-custom rounded-3xl">
           <Briefcase size={52} className="text-text-body/20 mx-auto mb-4" />
           <p className="text-base font-bold text-text-h mb-1">No jobs found</p>
           <p className="text-sm text-text-body/60 max-w-xs mx-auto mb-5">
@@ -245,7 +245,7 @@ const JobListings: React.FC = () => {
             return (
               <div
                 key={job._id}
-                className="group bg-white border border-border-custom rounded-3xl p-5 shadow-xs hover:shadow-lg hover:border-accent/20 transition-all duration-200 flex flex-col"
+                className="group bg-bg-custom border border-border-custom rounded-3xl p-5 shadow-xs hover:shadow-lg hover:border-accent/20 transition-all duration-200 flex flex-col"
               >
                 {/* Top row: source badge + match badge */}
                 <div className="flex justify-between items-start mb-3">
@@ -257,7 +257,7 @@ const JobListings: React.FC = () => {
                     </span>
 
                     {/* Job type */}
-                    <span className="text-[10px] bg-gray-100 text-text-body font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide">
+                    <span className="text-[10px] bg-social-bg text-text-body font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide">
                       {job.type}
                     </span>
 
@@ -295,7 +295,7 @@ const JobListings: React.FC = () => {
 
                 {/* Match bar */}
                 {job.matchPercentage !== undefined && (
-                  <div className="w-full h-1 bg-gray-100 rounded-full mb-4 overflow-hidden">
+                  <div className="w-full h-1 bg-social-bg rounded-full mb-4 overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all ${
                         job.matchPercentage >= 75 ? 'bg-emerald-400' :
@@ -312,7 +312,7 @@ const JobListings: React.FC = () => {
                     <img
                       src={job.companyLogo}
                       alt={job.company}
-                      className="w-10 h-10 rounded-xl object-contain border border-border-custom bg-gray-50 shrink-0 p-0.5"
+                      className="w-10 h-10 rounded-xl object-contain border border-border-custom bg-code-bg shrink-0 p-0.5"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                     />
                   ) : (
@@ -352,7 +352,7 @@ const JobListings: React.FC = () => {
                 {job.requirements?.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {job.requirements.slice(0, 4).map((r: string, i: number) => (
-                      <span key={i} className="text-[10px] bg-gray-100 text-text-body font-medium px-2 py-0.5 rounded-md hover:bg-accent-bg hover:text-accent transition-colors">
+                      <span key={i} className="text-[10px] bg-social-bg text-text-body font-medium px-2 py-0.5 rounded-md hover:bg-accent-bg hover:text-accent transition-colors">
                         {r}
                       </span>
                     ))}
@@ -364,7 +364,7 @@ const JobListings: React.FC = () => {
 
                 {/* Match insights */}
                 {job.matchInsights && (
-                  <p className="text-[11px] text-text-body italic line-clamp-2 leading-relaxed bg-gray-50 border border-border-custom/50 rounded-xl px-3 py-2 mb-4">
+                  <p className="text-[11px] text-text-body italic line-clamp-2 leading-relaxed bg-code-bg border border-border-custom/50 rounded-xl px-3 py-2 mb-4">
                     "{job.matchInsights}"
                   </p>
                 )}
@@ -384,7 +384,7 @@ const JobListings: React.FC = () => {
                   ) : (
                     <Link
                       to={`/jobs/${job._id}`}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-gray-50 hover:bg-accent hover:text-white border border-border-custom hover:border-transparent rounded-xl text-xs font-bold text-text-h transition-all"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-code-bg hover:bg-accent hover:text-white border border-border-custom hover:border-transparent rounded-xl text-xs font-bold text-text-h transition-all"
                     >
                       View & Apply
                       <ChevronRight size={14} />
@@ -403,7 +403,7 @@ const JobListings: React.FC = () => {
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-border-custom rounded-xl text-xs font-semibold text-text-body hover:border-accent hover:text-accent disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-bg-custom border border-border-custom rounded-xl text-xs font-semibold text-text-body hover:border-accent hover:text-accent disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             <ChevronLeft size={14} /> Prev
           </button>
@@ -413,7 +413,7 @@ const JobListings: React.FC = () => {
           <button
             onClick={() => setPage(p => p + 1)}
             disabled={totalExternal === 0 && page >= 1}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-border-custom rounded-xl text-xs font-semibold text-text-body hover:border-accent hover:text-accent disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-bg-custom border border-border-custom rounded-xl text-xs font-semibold text-text-body hover:border-accent hover:text-accent disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             Next <ChevronRight size={14} />
           </button>
