@@ -40,6 +40,7 @@ export const resumeAPI = {
   getLatest: () => api.get('/resume/latest'),
   getById: (id: string) => api.get(`/resume/${id}`),
   getHistory: () => api.get('/resume/history'),
+  delete: (id: string) => api.delete(`/resume/${id}`),
 };
 
 export const jobsAPI = {

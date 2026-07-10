@@ -145,10 +145,35 @@ const getAllResumes = async (req, res) => {
   }
 };
 
+/**
+ * @desc    Delete a student's own resume
+ * @route   DELETE /api/resume/:id
+ * @access  Private (Student)
+ */
+const deleteResume = async (req, res) => {
+  try {
+    const resume = await Resume.findOne({ _id: req.params.id, student: req.user.id });
+    if (!resume) {
+      return res.status(404).json({ success: false, error: 'Resume not found or access denied' });
+    }
+
+    // Remove physical file if it exists
+    if (resume.filePath && fs.existsSync(resume.filePath)) {
+      fs.unlinkSync(resume.filePath);
+    }
+
+    await resume.deleteOne();
+    return res.json({ success: true, message: 'Resume deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   upload,
   uploadAndAnalyzeResume,
   getLatestResume,
   getResumeById,
   getAllResumes,
+  deleteResume,
 };
