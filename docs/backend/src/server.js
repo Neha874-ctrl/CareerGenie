@@ -133,7 +133,11 @@ app.use(helmet({
   crossOriginResourcePolicy: false, // Allow frontend to fetch uploaded files
 }));
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://careergenie-mu.vercel.app',
+    process.env.CLIENT_URL
+  ].filter(Boolean),
   credentials: true,
 }));
 app.use(express.json());
