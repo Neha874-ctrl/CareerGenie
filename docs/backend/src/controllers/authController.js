@@ -68,12 +68,15 @@ exports.login = async (req, res) => {
 
     // Find user and select password
     const user = await User.findOne({ email }).select('+password');
+    console.log("Email received:", email);
+    console.log("User found:", user);
     if (!user) {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }
 
     // Check password
     const isMatch = await user.matchPassword(password);
+    console.log("Password match:", isMatch);
     if (!isMatch) {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }

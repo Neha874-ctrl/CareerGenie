@@ -124,7 +124,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 
 const app = express();
-
+app.set('trust proxy', 1);
 // Connect to Database
 connectDB();
 
