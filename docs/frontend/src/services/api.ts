@@ -71,9 +71,52 @@ export const notificationsAPI = {
 };
 
 export const adminAPI = {
+  // Stats
   getStats: () => api.get('/admin/stats'),
+
+  // Job moderation
   getPendingJobs: () => api.get('/admin/jobs/pending'),
+  getAllJobs: (filters?: { status?: string; search?: string; page?: number }) => {
+    const params = new URLSearchParams();
+    if (filters?.status) params.append('status', filters.status);
+    if (filters?.search) params.append('search', filters.search);
+    if (filters?.page) params.append('page', String(filters.page));
+    return api.get(`/admin/jobs?${params.toString()}`);
+  },
   moderateJob: (id: string, status: string) => api.put(`/admin/jobs/${id}/moderate`, { status }),
+  deleteJob: (id: string) => api.delete(`/admin/jobs/${id}`),
+
+  // User management
+  getAllUsers: (filters?: { role?: string; status?: string; search?: string; page?: number; limit?: number }) => {
+    const params = new URLSearchParams();
+    if (filters?.role) params.append('role', filters.role);
+    if (filters?.status) params.append('status', filters.status);
+    if (filters?.search) params.append('search', filters.search);
+    if (filters?.page) params.append('page', String(filters.page));
+    if (filters?.limit) params.append('limit', String(filters.limit));
+    return api.get(`/admin/users?${params.toString()}`);
+  },
+  updateUserRole: (id: string, role: string) => api.put(`/admin/users/${id}/role`, { role }),
+  updateUserStatus: (id: string, status: string) => api.put(`/admin/users/${id}/status`, { status }),
+  deleteUser: (id: string) => api.delete(`/admin/users/${id}`),
+
+  // Resume Management
+  getAllResumes: (page: number = 1, limit: number = 20) => api.get(`/admin/resumes?page=${page}&limit=${limit}`),
+  deleteResume: (id: string) => api.delete(`/admin/resumes/${id}`),
+
+  // Feedback Management
+  getAllFeedback: (page: number = 1, status?: string) => {
+    const params = new URLSearchParams();
+    params.append('page', String(page));
+    if (status) params.append('status', status);
+    return api.get(`/admin/feedback?${params.toString()}`);
+  },
+  updateFeedbackStatus: (id: string, status: string) => api.put(`/admin/feedback/${id}/status`, { status }),
+  deleteFeedback: (id: string) => api.delete(`/admin/feedback/${id}`),
+
+  // Notifications
+  getAllNotifications: (page: number = 1) => api.get(`/admin/notifications?page=${page}`),
+  createNotification: (data: { title: string; message: string; recipientRole?: string }) => api.post('/admin/notifications', data),
 };
 
 export default api;

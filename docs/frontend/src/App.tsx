@@ -15,8 +15,15 @@ import RecruiterDashboard from './pages/RecruiterDashboard';
 import ResumeUpload from './pages/ResumeUpload';
 import JobListings from './pages/JobListings';
 import JobDetails from './pages/JobDetails';
-import AdminPanel from './pages/AdminPanel';
 import ResumeHistory from './pages/ResumeHistory';
+
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminJobs from './pages/admin/AdminJobs';
+import AdminResumes from './pages/admin/AdminResumes';
+import AdminFeedback from './pages/admin/AdminFeedback';
+import AdminNotifications from './pages/admin/AdminNotifications';
 
 import './App.css';
 
@@ -110,10 +117,17 @@ const AppContent: React.FC = () => {
               path="/admin"
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
-                  <AdminPanel />
+                  <AdminLayout />
                 </ProtectedRoute>
               }
-            />
+            >
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="resumes" element={<AdminResumes />} />
+              <Route path="jobs" element={<AdminJobs />} />
+              <Route path="feedback" element={<AdminFeedback />} />
+              <Route path="notifications" element={<AdminNotifications />} />
+            </Route>
 
             {/* Fallback route */}
             <Route path="*" element={<Navigate to="/" replace />} />

@@ -13,7 +13,7 @@ const Signup: React.FC = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<'student' | 'recruiter'>('student');
+  const [selectedRole, setSelectedRole] = useState<'student' | 'recruiter' | 'admin'>('student');
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -26,7 +26,9 @@ const Signup: React.FC = () => {
       dispatch(loginSuccess({ user, token }));
       toast.success(`Welcome to CareerGenie, ${user.name}!`);
 
-      if (user.role === 'recruiter') {
+      if (user.role === 'admin') {
+        navigate('/admin');
+      } else if (user.role === 'recruiter') {
         navigate('/dashboard/recruiter');
       } else {
         navigate('/dashboard/student');
@@ -47,7 +49,7 @@ const Signup: React.FC = () => {
         </div>
 
         {/* Role Selector Tabs */}
-        <div className="grid grid-cols-2 gap-2 bg-gray-100 p-1.5 rounded-xl mb-6">
+        <div className="grid grid-cols-3 gap-2 bg-gray-100 p-1.5 rounded-xl mb-6">
           <button
             type="button"
             onClick={() => setSelectedRole('student')}
@@ -65,6 +67,15 @@ const Signup: React.FC = () => {
             }`}
           >
             I'm a Recruiter
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedRole('admin')}
+            className={`py-2 rounded-lg font-semibold text-xs transition-all cursor-pointer ${
+              selectedRole === 'admin' ? 'bg-white text-accent shadow-xs' : 'text-text-body hover:text-text-h'
+            }`}
+          >
+            Admin
           </button>
         </div>
 
