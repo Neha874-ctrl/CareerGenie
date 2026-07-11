@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "Node26"
+        nodejs "Node20"
         terraform "Terraform"
     }
 
