@@ -25,6 +25,3 @@ output "cloudfront_distribution_id" {
   value = aws_cloudfront_distribution.this.id
 }
 
-output "api_endpoint" {
-  value = aws_apigatewayv2_stage.default.invoke_url
-}
