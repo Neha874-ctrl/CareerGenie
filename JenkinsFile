@@ -79,26 +79,18 @@ pipeline {
     post {
 
         success {
-
             echo '======================================'
             echo 'CareerGenie CI Pipeline Successful'
             echo '======================================'
-
-            archiveArtifacts(
-                artifacts: 'docs/frontend/dist/**',
-                fingerprint: true
-            )
         }
 
         failure {
-
             echo '======================================'
             echo 'CareerGenie CI Pipeline Failed'
             echo '======================================'
         }
 
         always {
-
             cleanWs(
                 deleteDirs: true,
                 disableDeferredWipeout: true
