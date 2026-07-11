@@ -1,22 +1,22 @@
 output "frontend_bucket_name" {
   description = "S3 bucket name for frontend"
-  value = module.s3.frontend_bucket_name
+  value       = module.s3.frontend_bucket_name
 }
 
 
 output "cloudfront_domain_name" {
   description = "CloudFront URL"
-  value = module.cloudfront.cloudfront_domain_name
+  value       = module.cloudfront.cloudfront_domain_name
 }
 
 
 output "cloudfront_distribution_id" {
   description = "CloudFront distribution ID"
-  value = module.cloudfront.cloudfront_distribution_id
+  value       = module.cloudfront.cloudfront_distribution_id
 }
 
 
 output "api_gateway_url" {
   description = "API Gateway endpoint"
-  value = module.api_gateway.api_endpoint
+  value       = module.api_gateway.api_endpoint
 }
