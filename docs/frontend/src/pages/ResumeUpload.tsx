@@ -2,11 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { resumeAPI } from '../services/api';
 import toast from 'react-hot-toast';
-import { AlertCircle, Award, FileText, Sparkles, UploadCloud } from 'lucide-react';
+import { AlertCircle, Award, FileText, Sparkles, Trash2, UploadCloud } from 'lucide-react';
 
 const ResumeUpload: React.FC = () => {
   const [resume, setResume] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [activeTab, setActiveTab] = useState<'feedback' | 'structure'>('feedback');
 
   const fetchLatestResume = async () => {
@@ -47,6 +48,20 @@ const ResumeUpload: React.FC = () => {
       setLoading(false);
     }
   }, []);
+
+  const handleDeleteResume = async () => {
+    if (!resume || !window.confirm('Are you sure you want to delete this resume? This cannot be undone.')) return;
+    setDeleting(true);
+    try {
+      await resumeAPI.delete(resume._id);
+      toast.success('Resume deleted successfully');
+      setResume(null);
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || 'Failed to delete resume');
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -115,12 +130,22 @@ const ResumeUpload: React.FC = () => {
               </h2>
             </div>
             
-            <div className="flex items-center space-x-3 bg-bg-custom border border-border-custom px-4 py-2 rounded-2xl">
-              <Award className="text-accent" size={24} />
-              <div>
-                <p className="text-[10px] text-text-body uppercase font-bold leading-none">AI Score</p>
-                <p className="text-lg font-black text-text-h leading-none mt-1">{resume.feedback?.score || 75}/100</p>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 bg-bg-custom border border-border-custom px-4 py-2 rounded-2xl">
+                <Award className="text-accent" size={24} />
+                <div>
+                  <p className="text-[10px] text-text-body uppercase font-bold leading-none">AI Score</p>
+                  <p className="text-lg font-black text-text-h leading-none mt-1">{resume.feedback?.score || 75}/100</p>
+                </div>
               </div>
+              <button
+                onClick={handleDeleteResume}
+                disabled={deleting}
+                className="p-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-colors border border-red-200 hover:border-red-300"
+                title="Delete this resume"
+              >
+                <Trash2 size={18} />
+              </button>
             </div>
           </div>
 

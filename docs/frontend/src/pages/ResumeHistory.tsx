@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { resumeAPI } from '../services/api';
 import toast from 'react-hot-toast';
-import { AlertCircle, Award, Calendar, ChevronRight, FileText, History, TrendingUp } from 'lucide-react';
+import { AlertCircle, Award, Calendar, ChevronRight, FileText, History, Trash2, TrendingUp } from 'lucide-react';
 
 const ResumeHistory: React.FC = () => {
   const [resumes, setResumes] = useState<any[]>([]);
@@ -22,6 +22,20 @@ const ResumeHistory: React.FC = () => {
       toast.error('Failed to load resume analysis history');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    if (!window.confirm('Delete this resume analysis? This cannot be undone.')) return;
+    try {
+      await resumeAPI.delete(id);
+      toast.success('Resume deleted');
+      const updated = resumes.filter((r) => r._id !== id);
+      setResumes(updated);
+      setSelectedResume(updated.length > 0 ? updated[0] : null);
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || 'Failed to delete resume');
     }
   };
 
@@ -101,6 +115,13 @@ const ResumeHistory: React.FC = () => {
                     <span className="text-sm font-black text-accent bg-accent-bg px-2.5 py-1 rounded-full">
                       {resItem.feedback?.score || 75}
                     </span>
+                    <button
+                      onClick={(e) => handleDelete(e, resItem._id)}
+                      className="p-1 text-text-body/40 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      title="Delete"
+                    >
+                      <Trash2 size={14} />
+                    </button>
                     <ChevronRight size={16} className="text-text-body/40" />
                   </div>
                 </div>
