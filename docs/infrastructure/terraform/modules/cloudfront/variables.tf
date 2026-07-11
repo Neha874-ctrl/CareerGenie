@@ -22,3 +22,9 @@ variable "bucket_arn" {
   description = "S3 bucket ARN"
   type        = string
 }
+
+variable "distribution_arn" {
+  description = "CloudFront Distribution ARN"
+  type        = string
+  default     = null
+}

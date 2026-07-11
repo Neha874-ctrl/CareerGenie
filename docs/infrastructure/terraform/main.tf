@@ -22,28 +22,28 @@ module "vpc" {
 
 
 module "s3" {
-
   source = "./modules/s3"
 
   project_name = var.project_name
   environment  = var.environment
 
+
 }
 # Networking
 # Storage
 module "cloudfront" {
-
   source = "./modules/cloudfront"
 
   project_name = var.project_name
+  environment  = var.environment
 
-  environment = var.environment
-
-  bucket_name = module.s3.bucket_name
-
+  bucket_name        = module.s3.bucket_name
   bucket_domain_name = module.s3.bucket_domain_name
+  bucket_arn         = module.s3.bucket_arn
 
-  bucket_arn = module.s3.bucket_arn
+  depends_on = [
+    module.s3
+  ]
 }
 
 #lambda
