@@ -1,0 +1,113 @@
+pipeline {
+
+    agent any
+
+    tools {
+        nodejs "Node20"
+
+        terraform "Terraform"
+    }
+
+    environment {
+        FRONTEND_DIR = "frontend"
+        BACKEND_DIR = "backend"
+        TERRAFORM_DIR = "docs/infrastructure/terraform"
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+
+
+
+
+
+    stages {
+
+        stage('Checkout Source') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Backend Dependencies') {
+            steps {
+                dir(env.BACKEND_DIR) {
+                    sh 'npm ci'
+                }
+            }
+        }
+
+        stage('Install Frontend Dependencies') {
+            steps {
+                dir(env.FRONTEND_DIR) {
+                    sh 'npm ci'
+                }
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                dir(env.FRONTEND_DIR) {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                dir(env.TERRAFORM_DIR) {
+                    sh 'terraform init -input=false'
+                }
+            }
+        }
+
+        stage('Terraform Format Check') {
+            steps {
+                dir(env.TERRAFORM_DIR) {
+                    sh 'terraform fmt -check -recursive'
+                }
+            }
+        }
+
+        stage('Terraform Validate') {
+            steps {
+                dir(env.TERRAFORM_DIR) {
+                    sh 'terraform validate'
+                }
+            }
+        }
+    }
+
+    post {
+
+        success {
+
+            echo '======================================'
+            echo 'CareerGenie CI Pipeline Successful'
+            echo '======================================'
+
+            archiveArtifacts(
+                artifacts: 'frontend/dist/**',
+                fingerprint: true
+            )
+        }
+
+        failure {
+
+            echo '======================================'
+            echo 'CareerGenie CI Pipeline Failed'
+            echo '======================================'
+        }
+
+        always {
+
+            cleanWs(
+                deleteDirs: true,
+                disableDeferredWipeout: true
+            )
+        }
+    }
+}
