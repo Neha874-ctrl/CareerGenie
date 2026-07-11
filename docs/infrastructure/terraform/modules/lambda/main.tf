@@ -54,7 +54,9 @@ resource "aws_lambda_function" "backend" {
 
   handler = "index.handler"
 
-  filename = "${path.module}/lambda.zip"
+  filename = data.archive_file.lambda_zip.output_path
+
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
   timeout = 30
 
@@ -67,4 +69,10 @@ resource "aws_lambda_function" "backend" {
       var.lambda_security_group_id
     ]
   }
+}
+
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/src"
+  output_path = "${path.module}/lambda.zip"
 }
