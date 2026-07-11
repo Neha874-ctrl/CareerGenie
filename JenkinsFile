@@ -4,13 +4,12 @@ pipeline {
 
     tools {
         nodejs "Node20"
-
         terraform "Terraform"
     }
 
     environment {
-        FRONTEND_DIR = "frontend"
-        BACKEND_DIR = "backend"
+        FRONTEND_DIR  = "docs/frontend"
+        BACKEND_DIR   = "docs/backend"
         TERRAFORM_DIR = "docs/infrastructure/terraform"
     }
 
@@ -18,11 +17,6 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
-
-
-
-
-
 
     stages {
 
@@ -79,6 +73,7 @@ pipeline {
                 }
             }
         }
+
     }
 
     post {
@@ -90,7 +85,7 @@ pipeline {
             echo '======================================'
 
             archiveArtifacts(
-                artifacts: 'frontend/dist/**',
+                artifacts: 'docs/frontend/dist/**',
                 fingerprint: true
             )
         }
