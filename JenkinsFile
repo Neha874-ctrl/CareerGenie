@@ -188,75 +188,73 @@ pipeline {
 
         stage('Terraform Plan') {
 
+    steps {
 
-            steps {
+        dir(env.TERRAFORM_DIR) {
 
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws-credentials'],
 
-                dir(env.TERRAFORM_DIR) {
+                string(credentialsId: 'notification-email', variable: 'NOTIFICATION_EMAIL'),
+                string(credentialsId: 'mongo-uri', variable: 'MONGO_URI'),
+                string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+                string(credentialsId: 'gemini-api-key', variable: 'GEMINI_API_KEY'),
+                string(credentialsId: 'client-url', variable: 'CLIENT_URL')
+            ]) {
 
-
-                    withCredentials([
-                        [$class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-credentials']
-                    ]) {
-
-
-                        sh '''
-
-                        terraform plan \
-                        -input=false \
-                        -out=tfplan
-
-                        '''
-
-                    }
-
-                }
-
+                sh '''
+                terraform plan \
+                -input=false \
+                -out=tfplan \
+                -var="notification_email=$NOTIFICATION_EMAIL" \
+                -var="mongo_uri=$MONGO_URI" \
+                -var="jwt_secret=$JWT_SECRET" \
+                -var="gemini_api_key=$GEMINI_API_KEY" \
+                -var="client_url=$CLIENT_URL"
+                '''
 
             }
 
-
         }
 
+    }
+
+}
 
 
 
         stage('Terraform Apply') {
 
+    steps {
 
-            steps {
+        dir(env.TERRAFORM_DIR) {
 
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws-credentials'],
 
-                dir(env.TERRAFORM_DIR) {
+                string(credentialsId: 'notification-email', variable: 'NOTIFICATION_EMAIL'),
+                string(credentialsId: 'mongo-uri', variable: 'MONGO_URI'),
+                string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+                string(credentialsId: 'gemini-api-key', variable: 'GEMINI_API_KEY'),
+                string(credentialsId: 'client-url', variable: 'CLIENT_URL')
+            ]) {
 
-
-                    withCredentials([
-                        [$class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'aws-credentials']
-                    ]) {
-
-
-                        sh '''
-
-                        terraform apply \
-                        -input=false \
-                        -auto-approve \
-                        tfplan
-
-                        '''
-
-                    }
-
-
-                }
-
+                sh '''
+                terraform apply \
+                -input=false \
+                -auto-approve \
+                tfplan
+                '''
 
             }
 
-
         }
 
+    }
+
+}
 
 
     }
