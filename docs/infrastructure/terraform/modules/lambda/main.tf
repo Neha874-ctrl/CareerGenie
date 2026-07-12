@@ -45,3 +45,18 @@ resource "aws_lambda_function" "backend" {
     }
   }
 }
+variable "mongo_uri" {
+  type = string
+}
+
+variable "jwt_secret" {
+  type = string
+}
+
+variable "gemini_api_key" {
+  type = string
+}
+
+variable "client_url" {
+  type = string
+}
