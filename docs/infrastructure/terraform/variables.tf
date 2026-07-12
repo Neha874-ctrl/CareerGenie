@@ -1,27 +1,19 @@
 variable "aws_region" {
   description = "AWS region where resources will be created"
-
-  type = string
-
-  default = "us-east-1"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "environment" {
   description = "Deployment environment"
-
-  type = string
-
-  default = "dev"
+  type        = string
+  default     = "dev"
 }
 
 variable "project_name" {
   description = "Name of the project"
-
-  type = string
-
-  default = "careergenie"
-
-
+  type        = string
+  default     = "careergenie"
 }
 
 variable "availability_zone_1" {
@@ -62,5 +54,32 @@ variable "vpc_cidr" {
 
 variable "notification_email" {
   description = "Email for budget notifications"
+  type        = string
+}
+
+# ==========================
+# Lambda Environment Variables
+# ==========================
+
+variable "mongo_uri" {
+  description = "MongoDB connection string"
+  type        = string
+  sensitive   = true
+}
+
+variable "jwt_secret" {
+  description = "JWT Secret"
+  type        = string
+  sensitive   = true
+}
+
+variable "gemini_api_key" {
+  description = "Gemini API Key"
+  type        = string
+  sensitive   = true
+}
+
+variable "client_url" {
+  description = "Frontend URL"
   type        = string
 }
