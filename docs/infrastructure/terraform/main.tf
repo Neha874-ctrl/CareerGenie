@@ -40,11 +40,13 @@ module "cloudfront" {
   bucket_name        = module.s3.bucket_name
   bucket_domain_name = module.s3.bucket_domain_name
   bucket_arn         = module.s3.bucket_arn
+  api_gateway_url    = module.api_gateway.api_endpoint
 
   depends_on = [
     module.s3
   ]
 }
+
 
 #lambda
 module "lambda" {

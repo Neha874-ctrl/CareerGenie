@@ -28,3 +28,6 @@ variable "distribution_arn" {
   type        = string
   default     = null
 }
+variable "api_gateway_url" {
+  type = string
+}

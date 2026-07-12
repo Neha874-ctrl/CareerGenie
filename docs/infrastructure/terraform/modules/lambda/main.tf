@@ -6,7 +6,11 @@ data "archive_file" "lambda_zip" {
   excludes = [
     ".git",
     ".env",
-    "node_modules/.cache"
+    "*.log",
+    "uploads",
+    "tests",
+    "test",
+    "README.md"
   ]
 }
 
