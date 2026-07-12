@@ -29,3 +29,6 @@ Thumbs.db
 # Terraform crash logs
 crash.log
 crash.*.log
+
+# Lambda package
+**/lambda.zip

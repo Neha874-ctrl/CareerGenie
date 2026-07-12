@@ -37,26 +37,11 @@ resource "aws_lambda_function" "backend" {
 
   environment {
     variables = {
-      NODE_ENV        = "production"
-      MONGO_URI       = var.mongo_uri
-      JWT_SECRET      = var.jwt_secret
-      GEMINI_API_KEY  = var.gemini_api_key
-      CLIENT_URL      = var.client_url
+      NODE_ENV       = "production"
+      MONGO_URI      = var.mongo_uri
+      JWT_SECRET     = var.jwt_secret
+      GEMINI_API_KEY = var.gemini_api_key
+      CLIENT_URL     = var.client_url
     }
   }
-}
-variable "mongo_uri" {
-  type = string
-}
-
-variable "jwt_secret" {
-  type = string
-}
-
-variable "gemini_api_key" {
-  type = string
-}
-
-variable "client_url" {
-  type = string
 }
