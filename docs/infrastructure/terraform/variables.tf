@@ -55,7 +55,6 @@ variable "notification_email" {
   type    = string
   default = ""
 }
-
 # ==========================
 # Lambda Environment Variables
 # ==========================
