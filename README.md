@@ -46,7 +46,8 @@ The complete infrastructure is provisioned using Terraform, while Jenkins automa
 
 
 
-AWS Deployment
+# AWS Deployment
+
 The AWS deployment workflow of CareerGenie begins when the frontend sends an API request to the backend through Amazon API Gateway. 
 API Gateway acts as the single entry point for all client requests, validates and routes them to the appropriate AWS Lambda function.
 The Lambda function executes the Express.js backend logic, where user authentication, resume management, AI-powered cover letter generation,
