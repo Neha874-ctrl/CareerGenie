@@ -22,29 +22,31 @@ module "vpc" {
 
 
 module "s3" {
-
   source = "./modules/s3"
 
   project_name = var.project_name
   environment  = var.environment
 
+
 }
 # Networking
 # Storage
 module "cloudfront" {
-
   source = "./modules/cloudfront"
 
   project_name = var.project_name
+  environment  = var.environment
 
-  environment = var.environment
-
-  bucket_name = module.s3.bucket_name
-
+  bucket_name        = module.s3.bucket_name
   bucket_domain_name = module.s3.bucket_domain_name
+  bucket_arn         = module.s3.bucket_arn
+  api_gateway_url    = module.api_gateway.api_endpoint
 
-  bucket_arn = module.s3.bucket_arn
+  depends_on = [
+    module.s3
+  ]
 }
+
 
 #lambda
 module "lambda" {
@@ -52,8 +54,7 @@ module "lambda" {
   source = "./modules/lambda"
 
   project_name = var.project_name
-
-  environment = var.environment
+  environment  = var.environment
 
   private_subnet_ids = [
     module.vpc.private_subnet_1_id,
@@ -63,6 +64,12 @@ module "lambda" {
   lambda_security_group_id = module.vpc.lambda_security_group_id
 
   lambda_role_arn = module.iam.lambda_role_arn
+
+  # Environment Variables
+  mongo_uri      = var.mongo_uri
+  jwt_secret     = var.jwt_secret
+  gemini_api_key = var.gemini_api_key
+  client_url     = var.client_url
 }
 # Compute
 # Database

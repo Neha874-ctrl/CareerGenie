@@ -18,6 +18,10 @@ const Signup: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data: any) => {
+     console.log("Signup payload:", {
+    ...data,
+    role: selectedRole
+  });
     dispatch(loginStart());
     try {
       const response = await authAPI.signup({ ...data, role: selectedRole });

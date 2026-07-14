@@ -4,110 +4,309 @@ pipeline {
 
     tools {
         nodejs "Node20"
-
         terraform "Terraform"
     }
 
+
     environment {
-        FRONTEND_DIR = "frontend"
-        BACKEND_DIR = "backend"
+
+        FRONTEND_DIR  = "docs/frontend"
+        BACKEND_DIR   = "docs/backend"
         TERRAFORM_DIR = "docs/infrastructure/terraform"
+
+        AWS_REGION = "us-east-1"
+
     }
+
 
     options {
+
         timestamps()
+
         disableConcurrentBuilds()
+
     }
-
-
-
-
 
 
     stages {
 
+
         stage('Checkout Source') {
+
             steps {
+
                 checkout scm
+
             }
+
         }
+
 
         stage('Install Backend Dependencies') {
+
             steps {
+
                 dir(env.BACKEND_DIR) {
+
                     sh 'npm ci'
+
                 }
+
             }
+
         }
+
 
         stage('Install Frontend Dependencies') {
+
             steps {
+
                 dir(env.FRONTEND_DIR) {
+
                     sh 'npm ci'
+
                 }
+
             }
+
         }
+
 
         stage('Build Frontend') {
+
             steps {
+
                 dir(env.FRONTEND_DIR) {
+
                     sh 'npm run build'
+
                 }
+
             }
+
         }
+
+
+        stage('AWS Credentials Verify') {
+
+            steps {
+
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-credentials']
+                ]) {
+
+
+                    sh '''
+
+                    aws sts get-caller-identity
+
+                    aws configure set region ${AWS_REGION}
+
+                    '''
+
+                }
+
+            }
+
+        }
+
 
         stage('Terraform Init') {
+
             steps {
+
                 dir(env.TERRAFORM_DIR) {
-                    sh 'terraform init -input=false'
+
+
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'aws-credentials']
+                    ]) {
+
+
+                        sh '''
+
+                        terraform init \
+                        -input=false
+
+                        '''
+
+                    }
+
                 }
+
             }
+
         }
+
+
 
         stage('Terraform Format Check') {
+
             steps {
+
                 dir(env.TERRAFORM_DIR) {
-                    sh 'terraform fmt -check -recursive'
+
+
+                    sh '''
+
+                    terraform fmt \
+                    -check \
+                    -recursive
+
+                    '''
+
                 }
+
             }
+
         }
 
+
+
         stage('Terraform Validate') {
+
             steps {
+
                 dir(env.TERRAFORM_DIR) {
-                    sh 'terraform validate'
+
+
+                    sh '''
+
+                    terraform validate
+
+                    '''
+
                 }
+
             }
+
         }
+
+
+
+        stage('Terraform Plan') {
+
+    steps {
+
+        dir(env.TERRAFORM_DIR) {
+
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws-credentials'],
+
+                string(credentialsId: 'notification-email', variable: 'NOTIFICATION_EMAIL'),
+                string(credentialsId: 'mongo-uri', variable: 'MONGO_URI'),
+                string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+                string(credentialsId: 'gemini-api-key', variable: 'GEMINI_API_KEY'),
+                string(credentialsId: 'client-url', variable: 'CLIENT_URL')
+            ]) {
+
+                sh '''
+                terraform plan \
+                -input=false \
+                -out=tfplan \
+                -var="notification_email=$NOTIFICATION_EMAIL" \
+                -var="mongo_uri=$MONGO_URI" \
+                -var="jwt_secret=$JWT_SECRET" \
+                -var="gemini_api_key=$GEMINI_API_KEY" \
+                -var="client_url=$CLIENT_URL"
+                '''
+
+            }
+
+        }
+
     }
+
+}
+
+
+
+        stage('Terraform Apply') {
+
+    steps {
+
+        dir(env.TERRAFORM_DIR) {
+
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws-credentials'],
+
+                string(credentialsId: 'notification-email', variable: 'NOTIFICATION_EMAIL'),
+                string(credentialsId: 'mongo-uri', variable: 'MONGO_URI'),
+                string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+                string(credentialsId: 'gemini-api-key', variable: 'GEMINI_API_KEY'),
+                string(credentialsId: 'client-url', variable: 'CLIENT_URL')
+            ]) {
+
+                sh '''
+                terraform apply \
+                -input=false \
+                -auto-approve \
+                tfplan
+                '''
+
+            }
+
+        }
+
+    }
+
+}
+
+
+    }
+
+
 
     post {
 
+
         success {
 
-            echo '======================================'
-            echo 'CareerGenie CI Pipeline Successful'
-            echo '======================================'
+            echo '''
 
-            archiveArtifacts(
-                artifacts: 'frontend/dist/**',
-                fingerprint: true
-            )
+            ======================================
+            CareerGenie Deployment Successful 🚀
+            AWS Region: us-east-1
+            ======================================
+
+            '''
+
         }
+
+
 
         failure {
 
-            echo '======================================'
-            echo 'CareerGenie CI Pipeline Failed'
-            echo '======================================'
+            echo '''
+
+            ======================================
+            CareerGenie Deployment Failed ❌
+            Check Jenkins Logs
+            ======================================
+
+            '''
+
         }
 
+
+
         always {
+
 
             cleanWs(
                 deleteDirs: true,
                 disableDeferredWipeout: true
             )
+
+
         }
+
+
     }
+
+
 }

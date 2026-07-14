@@ -1,5 +1,4 @@
 resource "aws_s3_bucket" "frontend" {
-
   bucket = "${var.project_name}-${var.environment}-frontend"
 
   tags = {
@@ -8,7 +7,6 @@ resource "aws_s3_bucket" "frontend" {
 }
 
 resource "aws_s3_bucket_versioning" "frontend" {
-
   bucket = aws_s3_bucket.frontend.id
 
   versioning_configuration {
@@ -17,20 +15,16 @@ resource "aws_s3_bucket_versioning" "frontend" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "frontend" {
-
   bucket = aws_s3_bucket.frontend.id
 
   rule {
     apply_server_side_encryption_by_default {
-
       sse_algorithm = "AES256"
-
     }
   }
 }
 
 resource "aws_s3_bucket_public_access_block" "frontend" {
-
   bucket = aws_s3_bucket.frontend.id
 
   block_public_acls       = true
@@ -38,3 +32,4 @@ resource "aws_s3_bucket_public_access_block" "frontend" {
   block_public_policy     = true
   restrict_public_buckets = true
 }
+

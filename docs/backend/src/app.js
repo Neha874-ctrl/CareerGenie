@@ -117,6 +117,7 @@ const connectDB = async () => {
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
+
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
@@ -134,20 +135,80 @@ app.use(helmet({
 }));
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (Postman, mobile apps, server-to-server)
-    if (!origin) return callback(null, true);
 
-    const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
-    const isVercel = /^https:\/\/careergenie[^.]*\.vercel\.app$/.test(origin);
-    const isAllowedEnv = process.env.CLIENT_URL && origin === process.env.CLIENT_URL;
-
-    if (isLocalhost || isVercel || isAllowedEnv) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS: origin ${origin} not allowed`));
+    // Allow requests without origin
+    // (Postman, mobile apps, server-to-server)
+    if (!origin) {
+      return callback(null, true);
     }
+
+
+    // Local development
+    const isLocalhost =
+      /^http:\/\/localhost:\d+$/.test(origin);
+
+
+    // Existing Vercel deployment support
+    const isVercel =
+      /^https:\/\/careergenie[^.]*\.vercel\.app$/.test(origin);
+
+
+    // AWS CloudFront frontend support
+    const isCloudFront =
+      origin === "https://d305ubgmk0v0hg.cloudfront.net";
+
+
+    // Terraform/Jenkins injected CLIENT_URL
+    const isAllowedEnv =
+      process.env.CLIENT_URL &&
+      origin === process.env.CLIENT_URL;
+
+
+
+    if (
+      isLocalhost ||
+      isVercel ||
+      isCloudFront ||
+      isAllowedEnv
+    ) {
+
+      callback(null, true);
+
+    } else {
+
+      console.error(
+        `Blocked CORS request from origin: ${origin}`
+      );
+
+      callback(
+        new Error(
+          `CORS: origin ${origin} not allowed`
+        )
+      );
+
+    }
+
   },
+
+
   credentials: true,
+
+
+  methods: [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+  ],
+
+
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization"
+  ]
+
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -194,8 +255,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
+module.exports = app;

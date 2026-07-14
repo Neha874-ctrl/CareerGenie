@@ -1,47 +1,17 @@
-resource "aws_iam_role" "lambda_role" {
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.root}/../../backend"
+  output_path = "${path.module}/lambda.zip"
 
-  name = "${var.project_name}-${var.environment}-lambda-role"
-
-  assume_role_policy = jsonencode({
-
-    Version = "2012-10-17"
-
-    Statement = [
-
-      {
-
-        Action = "sts:AssumeRole"
-
-        Effect = "Allow"
-
-        Principal = {
-
-          Service = "lambda.amazonaws.com"
-
-        }
-
-      }
-
-    ]
-
-  })
-
-}
-
-resource "aws_iam_role_policy_attachment" "basic" {
-
-  role = aws_iam_role.lambda_role.name
-
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-
-}
-
-resource "aws_iam_role_policy_attachment" "vpc" {
-
-  role = aws_iam_role.lambda_role.name
-
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-
+  excludes = [
+    ".git",
+    ".env",
+    "*.log",
+    "uploads",
+    "tests",
+    "test",
+    "README.md"
+  ]
 }
 
 resource "aws_lambda_function" "backend" {
@@ -52,12 +22,13 @@ resource "aws_lambda_function" "backend" {
 
   runtime = "nodejs20.x"
 
-  handler = "index.handler"
+  handler = "src/lambda.handler"
 
-  filename = "${path.module}/lambda.zip"
+  filename = data.archive_file.lambda_zip.output_path
 
-  timeout = 30
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
+  timeout     = 30
   memory_size = 512
 
   vpc_config {
@@ -66,5 +37,15 @@ resource "aws_lambda_function" "backend" {
     security_group_ids = [
       var.lambda_security_group_id
     ]
+  }
+
+  environment {
+    variables = {
+      NODE_ENV       = "production"
+      MONGO_URI      = var.mongo_uri
+      JWT_SECRET     = var.jwt_secret
+      GEMINI_API_KEY = var.gemini_api_key
+      CLIENT_URL     = var.client_url
+    }
   }
 }
