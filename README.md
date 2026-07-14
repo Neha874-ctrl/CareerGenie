@@ -14,8 +14,6 @@ CareerGenie is a full-stack web application designed to help job seekers streaml
 * 🔐 Secure User Authentication using JWT
 * 👤 User Registration & Login
 * 📄 Resume Builder
-* ✍️ AI-Powered Cover Letter Generation
-* 🤖 AI-Based Interview Question Generation
 * 💼 Job Listings & Premium Jobs
 * ⭐ Save & Manage Favorite Jobs
 * 📊 User Dashboard
