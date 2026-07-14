@@ -29,42 +29,13 @@ CareerGenie is a full-stack web application designed to help job seekers streaml
 # 🏗️ System Architecture
 
 
-The frontend of CareerGenie is built with React and serves as the user interface through which users interact with
- the platform. It provides pages for user authentication, resume creation, AI-powered cover letter and interview question
- generation, job browsing, and managing saved jobs. React Router enables seamless navigation between different pages, while
-Axios is used to send HTTP requests to the backend APIs. The frontend performs basic client-side validation, manages application
- state, and dynamically updates the interface based on API responses. Once deployed, the static frontend files are hosted on Amazon
-S3 (or Vercel during development) and delivered efficiently through Amazon CloudFront, ensuring fast loading times and high availability.
+The frontend of CareerGenie is built with React and provides the user interface for authentication, resume creation, AI-generated cover letters and interview questions, job browsing, and saved jobs. It uses React Router for navigation, Axios for API calls, and basic client-side validation and state management. The static frontend is hosted on Amazon S3 and delivered through Amazon CloudFront for fast and reliable access.
 
-The backend is developed using Node.js and Express.js and exposes RESTful APIs that handle the application's business logic.
-It manages user authentication using JWT, processes requests related to resumes, cover letters, interview questions, and job
- management, and securely communicates with the Google Gemini API to generate AI-powered content. The backend stores and retrieves
-application data from Amazon DynamoDB and incorporates AWS services such as SNS, SQS, and EventBridge for asynchronous messaging
- and event-driven workflows where required. When deployed on AWS, the Express application runs as serverless AWS Lambda functions
-behind Amazon API Gateway, allowing requests from the frontend to be processed in a scalable, secure, and cost-efficient manner.
-The complete infrastructure is provisioned using Terraform, while Jenkins automates the build and deployment process through a CI/CD pipeline.
-
-
+The backend is built with Node.js and Express.js and exposes RESTful APIs for authentication, resume handling, AI content generation, and job management. It uses JWT for security, DynamoDB for data storage, and AWS services like SNS, SQS, and EventBridge for background and event-driven tasks. On AWS, the backend runs as Lambda functions behind API Gateway, while Terraform manages infrastructure and Jenkins handles CI/CD deployment.
 
 # AWS Deployment
 
-The AWS deployment workflow of CareerGenie begins when the frontend sends an API request to the backend through Amazon API Gateway. 
-API Gateway acts as the single entry point for all client requests, validates and routes them to the appropriate AWS Lambda function.
-The Lambda function executes the Express.js backend logic, where user authentication, resume management, AI-powered cover letter generation,
-interview question generation, and job-related operations are processed. If AI content is requested, the backend securely communicates with
-the Google Gemini API and returns the generated response. For data storage, the backend interacts with Amazon DynamoDB to store and retrieve
-user information, resumes, saved jobs, and other application data. For asynchronous tasks and event-driven processing, services such as Amazon 
-SNS, Amazon SQS, and Amazon EventBridge are used to publish notifications, queue background tasks, and trigger workflows when specific events occur. 
-Throughout the execution, Amazon CloudWatch collects logs and monitoring metrics to help track application performance and troubleshoot issues.
+The AWS deployment workflow of CareerGenie starts when the frontend sends requests through Amazon API Gateway, which routes them to AWS Lambda functions running the Express.js backend. The backend handles authentication, resume management, AI-powered content generation, and job-related operations, while also connecting to Google Gemini API for AI responses and Amazon DynamoDB for data storage. Services like Amazon SNS, SQS, and EventBridge support notifications and background tasks, and Amazon CloudWatch monitors logs and performance.
 
-On the frontend side, the React application is built into static files and uploaded to an Amazon S3 bucket configured for static website hosting.
-Amazon CloudFront sits in front of the S3 bucket as a Content Delivery Network (CDN), caching and delivering the frontend assets from edge 
-locations around the world to reduce latency and improve performance. When a user opens the application, CloudFront serves the React application
-from S3, and all API requests are forwarded to API Gateway, which invokes the appropriate Lambda functions. The entire AWS infrastructure, 
-including S3, CloudFront, API Gateway, Lambda, DynamoDB, IAM roles, SNS, SQS, EventBridge, and CloudWatch, is provisioned and managed using 
-Terraform, ensuring consistent and repeatable deployments. Jenkins automates this workflow by pulling the latest code from GitHub, installing 
-dependencies, building the React application, validating the Terraform configuration, provisioning or updating AWS resources, deploying the
-Lambda backend, uploading the frontend build to S3, and invalidating the CloudFront cache so users always receive the latest version of the 
-application.
-
+On the frontend, the React app is built as static files and hosted on Amazon S3, with Amazon CloudFront delivering it as a CDN for faster access. API requests from the frontend go through API Gateway to Lambda. The full AWS setup is managed with Terraform for consistent deployments, while Jenkins automates the process by pulling code from GitHub, building the app, deploying backend and frontend updates, and invalidating the CloudFront cache.
 
